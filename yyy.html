@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>College Admin Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      min-height: 100vh;
+      background-color: #f8f9fa;
+    }
+    .sidebar {
+      height: 100vh;
+      background-color: #343a40;
+      padding-top: 1rem;
+    }
+    .sidebar a {
+      color: #ffffff;
+      text-decoration: none;
+      display: block;
+      padding: 10px 15px;
+    }
+    .sidebar a:hover {
+      background-color: #495057;
+    }
+    .card {
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar -->
+    <nav class="col-md-2 d-none d-md-block sidebar">
+      <div class="position-sticky">
+        <h4 class="text-white text-center">Admin</h4>
+        <a href="#">Dashboard</a>
+        <a href="#">Students</a>
+        <a href="#">Courses</a>
+        <a href="#">Attendance</a>
+        <a href="#">Results</a>
+        <a href="#">Settings</a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="col-md-10 ms-sm-auto col-lg-10 px-md-4 py-4">
+      <h2>Dashboard Overview</h2>
+      
+      <!-- Statistic Cards -->
+      <div class="row g-4 my-3">
+        <div class="col-md-4">
+          <div class="card text-white bg-primary">
+            <div class="card-body">
+              <h5 class="card-title">Total Students</h5>
+              <p class="card-text fs-3">1,250</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card text-white bg-success">
+            <div class="card-body">
+              <h5 class="card-title">Active Courses</h5>
+              <p class="card-text fs-3">45</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card text-white bg-warning">
+            <div class="card-body">
+              <h5 class="card-title">Pending Fees</h5>
+              <p class="card-text fs-3">₹3.5L</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div class="card my-4">
+        <div class="card-header">
+          Recent Students
+        </div>
+        <div class="card-body table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Course</th>
+                <th>Year</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Anjali Sharma</td>
+                <td>B.Sc CS</td>
+                <td>2nd</td>
+                <td><span class="badge bg-success">Active</span></td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Rahul Mehta</td>
+                <td>BBA</td>
+                <td>1st</td>
+                <td><span class="badge bg-warning text-dark">Pending</span></td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Sneha Patel</td>
+                <td>B.Com</td>
+                <td>3rd</td>
+                <td><span class="badge bg-success">Active</span></td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Arjun Das</td>
+                <td>B.Tech</td>
+                <td>4th</td>
+                <td><span class="badge bg-danger">Inactive</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Charts Section -->
+      <div class="row g-4">
+        <!-- Pie Chart -->
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">Student Distribution</div>
+            <div class="card-body">
+              <canvas id="studentPieChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bar Chart -->
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">Monthly Fees Collection</div>
+            <div class="card-body">
+              <canvas id="feesBarChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  // Pie Chart
+  const pieCtx = document.getElementById('studentPieChart').getContext('2d');
+  new Chart(pieCtx, {
+    type: 'pie',
+    data: {
+      labels: ['CS', 'BBA', 'B.Com', 'B.Tech'],
+      datasets: [{
+        label: 'Students',
+        data: [300, 250, 200, 500],
+        backgroundColor: ['#0d6efd', '#198754', '#ffc107', '#dc3545']
+      }]
+    }
+  });
+
+  // Bar Chart
+  const barCtx = document.getElementById('feesBarChart').getContext('2d');
+  new Chart(barCtx, {
+    type: 'bar',
+    data: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+      datasets: [{
+        label: 'Fees Collected (₹)',
+        data: [200000, 250000, 300000, 180000, 220000],
+        backgroundColor: '#0d6efd'
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
